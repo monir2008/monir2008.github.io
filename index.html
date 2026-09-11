@@ -1,420 +1,355 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>معرض أعمالي | ملف شخصي احترافي</title>
-    <style>
-        /* CSS Variables - الألوان والخطوط */
-        :root {
-            --primary-color: #2563eb;
-            --primary-hover: #1d4ed8;
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --border-color: #e2e8f0;
-            --radius: 12px;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
-        }
-
-        /* Reset General Styles */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.7;
-            padding: 0;
-            margin: 0;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        /* Container Layout */
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Navigation Header */
-        header {
-            background-color: var(--card-bg);
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 70px;
-        }
-
-        .logo {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 20px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            font-weight: 500;
-            color: var(--text-muted);
-            transition: color 0.2s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-color);
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 80px 0 60px;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            color: var(--text-main);
-            font-weight: 800;
-        }
-
-        .hero p {
-            font-size: 1.15rem;
-            color: var(--text-muted);
-            max-width: 650px;
-            margin: 0 auto 30px;
-        }
-
-        .btn-group {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 28px;
-            border-radius: var(--radius);
-            font-weight: 600;
-            transition: all 0.2s ease;
-            cursor: pointer;
-        }
-
-        .btn-primary {
-            background-color: var(--primary-color);
-            color: #ffffff;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--primary-hover);
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background-color: var(--card-bg);
-            color: var(--text-main);
-            border: 1px solid var(--border-color);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--primary-color);
-            color: var(--primary-color);
-            transform: translateY(-2px);
-        }
-
-        /* Sections Common Style */
-        section {
-            padding: 50px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 1.8rem;
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 50px;
-            height: 4px;
-            background-color: var(--primary-color);
-            margin: 8px auto 0;
-            border-radius: 2px;
-        }
-
-        /* Skills Section */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .skill-card {
-            background: var(--card-bg);
-            padding: 25px;
-            border-radius: var(--radius);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .skill-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .skill-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: var(--primary-color);
-        }
-
-        .skill-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        /* Projects Section */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
-
-        .project-card {
-            background: var(--card-bg);
-            border-radius: var(--radius);
-            border: 1px solid var(--border-color);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.2s ease;
-        }
-
-        .project-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .project-info {
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .project-title {
-            font-size: 1.25rem;
-            margin-bottom: 10px;
-        }
-
-        .project-desc {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-            flex-grow: 1;
-        }
-
-        .tags {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-
-        .tag {
-            background-color: #eff6ff;
-            color: var(--primary-color);
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .project-link {
-            font-weight: 600;
-            color: var(--primary-color);
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        /* Contact & Footer */
-        .contact-box {
-            background: var(--card-bg);
-            border-radius: var(--radius);
-            border: 1px solid var(--border-color);
-            padding: 40px 20px;
-            text-align: center;
-            box-shadow: var(--shadow);
-        }
-
-        footer {
-            border-top: 1px solid var(--border-color);
-            padding: 25px 0;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-top: 40px;
-        }
-
-        /* Responsive Styles */
-        @media (max-width: 640px) {
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-            .hero p {
-                font-size: 1rem;
-            }
-            .nav-links {
-                gap: 12px;
-                font-size: 0.9rem;
-            }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07131e">
+  <meta name="description" content="معرض أعمال أحمد منير في تصميم وتطوير مواقع WordPress والمتاجر الإلكترونية وتحسين محركات البحث SEO.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ar_AR">
+  <meta property="og:title" content="أحمد منير | WordPress & SEO">
+  <meta property="og:description" content="مواقع أسرع، تجربة أفضل، وبنية SEO مصممة للنمو.">
+  <title>أحمد منير | مصمم WordPress ومتخصص SEO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%2307131e'/%3E%3Cpath d='M17 18h8l7 19 7-19h8L35 49h-7L17 18Z' fill='%2337e6c4'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Ahmed Mounir",
+    "alternateName": "أحمد منير",
+    "jobTitle": "WordPress Developer & SEO Specialist",
+    "telephone": "+201023501848",
+    "knowsAbout": ["WordPress", "WooCommerce", "Technical SEO", "Local SEO", "Web Performance", "Google Ads"]
+  }
+  </script>
 </head>
 <body>
+  <a class="skip-link" href="#main">انتقل إلى المحتوى</a>
 
-    <!-- القائمة العلوية -->
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo">موقعي الشخصي</div>
-                <ul class="nav-links">
-                    <li><a href="#about">عني</a></li>
-                    <li><a href="#skills">المهارات</a></li>
-                    <li><a href="#projects">المشاريع</a></li>
-                    <li><a href="#contact">تواصل معي</a></li>
-                </ul>
-            </nav>
+  <header class="site-header" id="top">
+    <div class="container nav-wrap">
+      <a class="brand" href="#top" aria-label="العودة إلى بداية الصفحة">
+        <span class="brand-mark" aria-hidden="true">AM</span>
+        <span class="brand-copy">
+          <strong>أحمد منير</strong>
+          <small>WordPress × SEO</small>
+        </span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="فتح القائمة">
+        <span></span><span></span>
+      </button>
+
+      <nav class="primary-nav" id="primary-nav" aria-label="التنقل الرئيسي">
+        <a href="#work">أعمالي</a>
+        <a href="#services">خدماتي</a>
+        <a href="#about">عني</a>
+        <a href="#process">طريقة العمل</a>
+      </nav>
+
+      <a class="nav-cta" href="https://wa.me/201023501848?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%A3%D8%AD%D9%85%D8%AF%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AA%D8%AD%D8%AF%D8%AB%20%D9%85%D8%B9%D9%83%20%D8%B9%D9%86%20%D9%85%D8%B4%D8%B1%D9%88%D8%B9%D9%8A." target="_blank" rel="noopener noreferrer">
+        لنتحدث عن مشروعك
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="orb orb-one" aria-hidden="true"></div>
+      <div class="orb orb-two" aria-hidden="true"></div>
+      <div class="container hero-layout">
+        <div class="hero-copy reveal">
+          <div class="availability"><span></span> متاح لتنفيذ مشروعات جديدة</div>
+          <p class="eyebrow">WORDPRESS DEVELOPER &amp; SEO SPECIALIST</p>
+          <h1 id="hero-title">أصمم مواقع<br><span>تعمل لصالحك.</span></h1>
+          <p class="hero-lead">أحوّل الفكرة إلى موقع سريع ومقنع، ثم أبني له أساسًا تقنيًا يساعده على الظهور في جوجل وتحويل الزيارات إلى فرص عمل حقيقية.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#work">
+              استعرض الأعمال
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="btn btn-ghost" href="https://wa.me/201023501848?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%A3%D8%AD%D9%85%D8%AF%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%B9%D8%B1%D8%B6%20%D9%81%D9%83%D8%B1%D8%A9%20%D9%85%D8%B4%D8%B1%D9%88%D8%B9%D9%8A%20%D8%B9%D9%84%D9%8A%D9%83." target="_blank" rel="noopener noreferrer">
+              واتساب مباشر
+            </a>
+          </div>
         </div>
-    </header>
 
-    <!-- المقدمة الشخصية -->
-    <section class="hero" id="about">
-        <div class="container">
-            <h1>مرحباً، أنا مطور ويب ومتخصص SEO</h1>
-            <p>أساعد أصحاب الأعمال والشركات على بناء مواقع سريعة باستخدام وردبريس وتحسين ظهورها في محركات البحث لتحقيق أفضل نتائج ممكنة.</p>
-            <div class="btn-group">
-                <a href="#projects" class="btn btn-primary">تصفح المشاريع</a>
-                <a href="#contact" class="btn btn-secondary">تواصل معي</a>
+        <aside class="hero-panel reveal" aria-label="نبذة سريعة">
+          <div class="panel-top">
+            <span>PROFILE / 2026</span>
+            <span class="panel-status">ONLINE</span>
+          </div>
+          <div class="hero-monogram" aria-hidden="true">
+            <span>AM</span>
+            <i>WEB<br>SEO</i>
+          </div>
+          <div class="panel-stats">
+            <div>
+              <strong>2007</strong>
+              <span>البداية مع WordPress</span>
             </div>
-        </div>
+            <div>
+              <strong>6</strong>
+              <span>أسواق إقليمية ودولية</span>
+            </div>
+            <div>
+              <strong>360°</strong>
+              <span>تصميم، تطوير، وSEO</span>
+            </div>
+          </div>
+          <div class="panel-tags" aria-label="التخصصات">
+            <span>WordPress</span><span>WooCommerce</span><span>Technical SEO</span><span>Local SEO</span>
+          </div>
+        </aside>
+      </div>
+      <div class="container scroll-line" aria-hidden="true"><span>مرّر لاكتشاف الأعمال</span><i></i></div>
     </section>
 
-    <!-- قسم المهارات -->
-    <section id="skills">
-        <div class="container">
-            <h2 class="section-title">مجالات الخبرة</h2>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <h3>تطوير ووردبريس (WordPress)</h3>
-                    <p>تطوير قوالب وإضافات مخصصة، ضبط الأداء والأمان، وتحسين السرعة للوصول لدرجات ممتازة على PageSpeed.</p>
-                </div>
-                <div class="skill-card">
-                    <h3>تحسين محركات البحث (SEO)</h3>
-                    <p>تهيأة المواقع تقنياً (Technical SEO)، تحسين الهيكلية، إضافة الـ Schema، وبناء استراتيجيات الكلمات المفتاحية.</p>
-                </div>
-                <div class="skill-card">
-                    <h3>برمجة الويب (Front-End)</h3>
-                    <p>بناء واجهات مستخدم متجاوبة وسريعة الاستجابة باستخدام HTML5, CSS3, JavaScript الحديثة.</p>
-                </div>
-            </div>
+    <section class="trust-strip" aria-label="مجالات الخبرة">
+      <div class="container marquee-shell">
+        <div class="marquee-track">
+          <span>مواقع الشركات</span><i></i><span>المتاجر الإلكترونية</span><i></i><span>المواقع الخدمية</span><i></i><span>المنصات التعليمية</span><i></i><span>Technical SEO</span><i></i><span>Local SEO</span>
+          <span aria-hidden="true">مواقع الشركات</span><i aria-hidden="true"></i><span aria-hidden="true">المتاجر الإلكترونية</span><i aria-hidden="true"></i><span aria-hidden="true">المواقع الخدمية</span><i aria-hidden="true"></i><span aria-hidden="true">المنصات التعليمية</span><i aria-hidden="true"></i><span aria-hidden="true">Technical SEO</span><i aria-hidden="true"></i><span aria-hidden="true">Local SEO</span>
         </div>
+      </div>
     </section>
 
-    <!-- قسم معرض المشاريع -->
-    <section id="projects">
-        <div class="container">
-            <h2 class="section-title">أحدث المشاريع</h2>
-            <div class="projects-grid">
-                
-                <!-- مشروع 1 -->
-                <div class="project-card">
-                    <div class="project-info">
-                        <h3 class="project-title">متجر إلكتروني سريع بـ WooCommerce</h3>
-                        <p class="project-desc">تطوير متجر متكامل مع ضبط سرعة التحميل لتكون أقل من ثانية واحدة وتحسين تجربة المستخدم على الهواتف.</p>
-                        <div class="tags">
-                            <span class="tag">WordPress</span>
-                            <span class="tag">WooCommerce</span>
-                            <span class="tag">PageSpeed</span>
-                        </div>
-                        <a href="#" class="project-link">معاينة المشروع &larr;</a>
-                    </div>
-                </div>
-
-                <!-- مشروع 2 -->
-                <div class="project-card">
-                    <div class="project-info">
-                        <h3 class="project-title">حملة تحسين SEO لموقع إخباري</h3>
-                        <p class="project-desc">إصلاح المشاكل التقنية وتصميم Schema مخصصة أدت إلى زيادة الزيارات الإرشادية بنسبة 150% خلال 3 أشهر.</p>
-                        <div class="tags">
-                            <span class="tag">Technical SEO</span>
-                            <span class="tag">Schema</span>
-                            <span class="tag">Analytics</span>
-                        </div>
-                        <a href="#" class="project-link">معاينة التقرير &larr;</a>
-                    </div>
-                </div>
-
-                <!-- مشروع 3 -->
-                <div class="project-card">
-                    <div class="project-info">
-                        <h3 class="project-title">إضافة وردبريس مخصصة</h3>
-                        <p class="project-desc">برمجة إضافة خفيفة لحساب تكاليف الشحن تلقائياً دون التأثير على سرعة موقع العميل.</p>
-                        <div class="tags">
-                            <span class="tag">PHP</span>
-                            <span class="tag">WordPress Plugin</span>
-                        </div>
-                        <a href="#" class="project-link">عرض على GitHub &larr;</a>
-                    </div>
-                </div>
-
-            </div>
+    <section class="work section" id="work" aria-labelledby="work-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="section-kicker"><span>01</span> أعمال مختارة</p>
+            <h2 id="work-title">مشروعات صنعت لها<br><em>حضورًا أقوى.</em></h2>
+          </div>
+          <p>نماذج من العمل على مواقع خدمية، محتوى متخصص، ومنصات تعليمية في أسواق عربية وأوروبية.</p>
         </div>
+
+        <div class="filters reveal" role="group" aria-label="تصفية المشروعات">
+          <button class="filter active" type="button" data-filter="all" aria-pressed="true">الكل</button>
+          <button class="filter" type="button" data-filter="wordpress" aria-pressed="false">WordPress</button>
+          <button class="filter" type="button" data-filter="seo" aria-pressed="false">SEO</button>
+          <button class="filter" type="button" data-filter="commerce" aria-pressed="false">متاجر وحلول</button>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project-card project-featured reveal" data-category="wordpress seo">
+            <div class="project-visual visual-cleaning">
+              <div class="project-index">01</div>
+              <div class="visual-label"><span>LOCAL SERVICE</span><strong>البريق<br>المثالي</strong></div>
+              <div class="project-role">AL-BAHA · KSA</div>
+            </div>
+            <div class="project-content">
+              <div class="project-meta"><span>WordPress</span><span>Local SEO</span><span>Content</span></div>
+              <h3>البريق المثالي</h3>
+              <p>موقع خدمات تنظيف ومكافحة حشرات في منطقة الباحة، بهيكل صفحات محلية ومحتوى خدمي مصمم لبناء الثقة ودعم الظهور في البحث المحلي.</p>
+              <a href="https://albrekelmethali.com/" target="_blank" rel="noopener noreferrer" aria-label="زيارة موقع البريق المثالي">
+                زيارة المشروع
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="project-card reveal" data-category="wordpress seo">
+            <div class="project-visual visual-waha">
+              <div class="project-index">02</div>
+              <div class="visual-label"><span>SERVICE WEBSITE</span><strong>واحة<br>الجمال</strong></div>
+              <div class="project-role">DUBAI · UAE</div>
+            </div>
+            <div class="project-content">
+              <div class="project-meta"><span>WordPress</span><span>Service Pages</span><span>SEO</span></div>
+              <h3>واحة الجمال</h3>
+              <p>تطوير حضور رقمي لشركة تنظيف ومكافحة آفات في دبي، مع صفحات خدمات دقيقة وتجربة واضحة تقود العميل إلى التواصل.</p>
+              <a href="https://wahataljamalcleaningservices.com/" target="_blank" rel="noopener noreferrer" aria-label="زيارة موقع واحة الجمال">
+                زيارة المشروع
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="project-card reveal" data-category="wordpress seo commerce">
+            <div class="project-visual visual-zina">
+              <div class="project-index">03</div>
+              <div class="visual-label"><span>BEAUTY CONTENT</span><strong>ZINA<br>WAYS</strong></div>
+              <div class="project-role">ARABIC · MENA</div>
+            </div>
+            <div class="project-content">
+              <div class="project-meta"><span>Content Architecture</span><span>SEO</span><span>RTL</span></div>
+              <h3>ZinaWays</h3>
+              <p>منصة عربية للجمال والعناية، بهندسة محتوى عنقودية وروابط داخلية منظمة لدعم النمو العضوي وتجربة القراءة.</p>
+              <a href="https://zinaways.com/" target="_blank" rel="noopener noreferrer" aria-label="زيارة موقع ZinaWays">
+                زيارة المشروع
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="project-card reveal" data-category="wordpress seo">
+            <div class="project-visual visual-wafaa">
+              <div class="project-index">04</div>
+              <div class="visual-label"><span>ONLINE LEARNING</span><strong>AL WAFAA<br>INSTITUTE</strong></div>
+              <div class="project-role">USA · UK</div>
+            </div>
+            <div class="project-content">
+              <div class="project-meta"><span>Education</span><span>English SEO</span><span>WordPress</span></div>
+              <h3>Al-Wafaa Institute</h3>
+              <p>منصة تعليم قرآن ولغة عربية موجهة للولايات المتحدة والمملكة المتحدة، مع بناء صفحات ومحتوى إنجليزي يراعي نية البحث.</p>
+              <a href="https://alwafaainstitute.com/" target="_blank" rel="noopener noreferrer" aria-label="زيارة موقع Al-Wafaa Institute">
+                زيارة المشروع
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="project-card reveal" data-category="wordpress seo">
+            <div class="project-visual visual-quran">
+              <div class="project-index">05</div>
+              <div class="visual-label"><span>QURAN EDUCATION</span><strong>QURAN<br>OASIS</strong></div>
+              <div class="project-role">GLOBAL · EN</div>
+            </div>
+            <div class="project-content">
+              <div class="project-meta"><span>WordPress</span><span>Content</span><span>On-page SEO</span></div>
+              <h3>Quran Oasis</h3>
+              <p>موقع تعليمي عالمي لدروس القرآن والعربية، يجمع بين عرض البرامج بوضوح ومحتوى محسن للوصول إلى الباحثين باللغة الإنجليزية.</p>
+              <a href="https://quranoasis.com/" target="_blank" rel="noopener noreferrer" aria-label="زيارة موقع Quran Oasis">
+                زيارة المشروع
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="project-card reveal" data-category="wordpress commerce">
+            <div class="project-visual visual-money">
+              <div class="project-index">06</div>
+              <div class="visual-label"><span>CURRENCY TOOLS</span><strong>SEFINA<br>EXCHANGE</strong></div>
+              <div class="project-role">FINTECH · WEB</div>
+            </div>
+            <div class="project-content">
+              <div class="project-meta"><span>WordPress</span><span>Custom Calculator</span><span>UX</span></div>
+              <h3>Sefina Money Exchange</h3>
+              <p>موقع لتحويل وتبادل العملات يتضمن حاسبة مخصصة ومسارات تحويل متعددة داخل WordPress، مع تبسيط تجربة المستخدم.</p>
+              <a href="https://money-exchange-sefina.com/" target="_blank" rel="noopener noreferrer" aria-label="زيارة موقع Sefina Money Exchange">
+                زيارة المشروع
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <!-- قسم التواصل -->
-    <section id="contact">
-        <div class="container">
-            <div class="contact-box">
-                <h2 style="margin-bottom: 15px;">هل لديك مشروع تريد تنفيذه؟</h2>
-                <p style="color: var(--text-muted); margin-bottom: 25px;">أنا متاح دائماً لمناقشة المشاريع الجديدة والفرص الاستشارية.</p>
-                <a href="mailto:your-email@example.com" class="btn btn-primary">أرسل لي رسالة بريدية</a>
-            </div>
+    <section class="services section" id="services" aria-labelledby="services-title">
+      <div class="container">
+        <div class="section-head light reveal">
+          <div>
+            <p class="section-kicker"><span>02</span> ماذا أقدم؟</p>
+            <h2 id="services-title">خبرة تجمع بين<br><em>الشكل والنتيجة.</em></h2>
+          </div>
+          <p>لا أفصل تصميم الموقع عن أدائه أو ظهوره؛ كل قرار بصري وتقني يجب أن يخدم هدفًا تجاريًا واضحًا.</p>
         </div>
+
+        <div class="services-list">
+          <article class="service-row reveal">
+            <span class="service-number">01</span>
+            <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 20V9"/></svg></div>
+            <h3>تصميم وتطوير WordPress</h3>
+            <p>مواقع شركات وخدمات ومنصات تعليمية متجاوبة، سهلة الإدارة، ومبنية بهيكل قابل للتوسع.</p>
+          </article>
+          <article class="service-row reveal">
+            <span class="service-number">02</span>
+            <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 5h2l2.4 10.2a2 2 0 0 0 2 1.5h7.8a2 2 0 0 0 1.9-1.4L21 9H7M10 21h.01M17 21h.01"/></svg></div>
+            <h3>متاجر WooCommerce</h3>
+            <p>متاجر سريعة مع تنظيم المنتجات، بوابات الدفع، تجربة شراء واضحة، وتحسين صفحات البيع.</p>
+          </article>
+          <article class="service-row reveal">
+            <span class="service-number">03</span>
+            <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4M8 11l2 2 4-5"/></svg></div>
+            <h3>SEO تقني وداخلي</h3>
+            <p>بنية صفحات، فهرسة، Schema، روابط داخلية، سرعة، وتجربة استخدام تخدم محركات البحث والزائر معًا.</p>
+          </article>
+          <article class="service-row reveal">
+            <span class="service-number">04</span>
+            <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
+            <h3>Local SEO</h3>
+            <p>تهيئة المواقع الخدمية للبحث المحلي وبناء صفحات مناطق وخدمات مرتبطة بما يبحث عنه العميل فعلًا.</p>
+          </article>
+          <article class="service-row reveal">
+            <span class="service-number">05</span>
+            <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h8l-1 8 9-12h-8l1-8Z"/></svg></div>
+            <h3>السرعة والصيانة</h3>
+            <p>تحسين الأداء، حل المشكلات التقنية، النسخ الاحتياطي، الحماية، ودعم WordPress المستمر.</p>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <!-- الفوتر -->
-    <footer>
-        <div class="container">
-            <p>جميع الحقوق محفوظة &copy; 2026 - تم الاستضافة مجاناً على GitHub Pages</p>
+    <section class="about section" id="about" aria-labelledby="about-title">
+      <div class="container about-layout">
+        <div class="about-title reveal">
+          <p class="section-kicker"><span>03</span> عني</p>
+          <h2 id="about-title">أفهم الكود.<br>وأفهم <em>العميل.</em></h2>
         </div>
-    </footer>
+        <div class="about-copy reveal">
+          <p class="about-lead">أنا أحمد منير، مصمم ومطور مواقع WordPress ومتخصص SEO. بدأت العمل مع WordPress منذ عام 2007، ونفذت مشروعات لقطاعات وأسواق مختلفة في السعودية والأردن والإمارات والكويت ومصر وأوروبا.</p>
+          <p>خلفيتي في التصميم والتطوير وتحسين محركات البحث تجعلني أرى الموقع كنظام واحد: رسالة واضحة، تجربة استخدام ذكية، أساس تقني سليم، وخطة نمو قابلة للقياس.</p>
+          <div class="skill-cloud" aria-label="المهارات">
+            <span>WordPress</span><span>WooCommerce</span><span>PHP</span><span>HTML / CSS</span><span>JavaScript</span><span>Technical SEO</span><span>Content Strategy</span><span>Google Ads</span><span>PageSpeed</span><span>Schema</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
+    <section class="process section" id="process" aria-labelledby="process-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="section-kicker"><span>04</span> طريقة العمل</p>
+            <h2 id="process-title">من الفكرة إلى موقع<br><em>جاهز للنمو.</em></h2>
+          </div>
+          <p>عملية واضحة تختصر القرارات المشتتة وتبقي كل خطوة مرتبطة بهدف المشروع.</p>
+        </div>
+        <ol class="process-grid">
+          <li class="reveal"><span>01</span><h3>فهم المشروع</h3><p>أحدد الجمهور، الهدف، المنافسين، ومسار التحويل الأساسي.</p></li>
+          <li class="reveal"><span>02</span><h3>الهيكل والتصميم</h3><p>أبني الصفحات وتجربة الاستخدام والهوية البصرية حول الأولويات.</p></li>
+          <li class="reveal"><span>03</span><h3>التطوير والتهيئة</h3><p>أنفذ الموقع وأضبط الأداء، التوافق، والأساس التقني للـSEO.</p></li>
+          <li class="reveal"><span>04</span><h3>الإطلاق والتحسين</h3><p>أراجع التفاصيل وأتابع البيانات لتحسين الظهور والتحويل.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="contact section" id="contact" aria-labelledby="contact-title">
+      <div class="contact-grid" aria-hidden="true"></div>
+      <div class="container contact-inner reveal">
+        <p class="contact-kicker">لديك مشروع يستحق أن يظهر بصورة أفضل؟</p>
+        <h2 id="contact-title">لنبنِ شيئًا<br><span>يستحق التذكّر.</span></h2>
+        <p>أرسل لي فكرة مشروعك أو رابط موقعك الحالي، وسنبدأ بمناقشة واضحة حول ما يحتاجه فعلًا.</p>
+        <a class="whatsapp-button" href="https://wa.me/201023501848?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%A3%D8%AD%D9%85%D8%AF%D8%8C%20%D8%B4%D8%A7%D9%87%D8%AF%D8%AA%20%D9%85%D8%B9%D8%B1%D8%B6%20%D8%A3%D8%B9%D9%85%D8%A7%D9%84%D9%83%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D9%85%D9%86%D8%A7%D9%82%D8%B4%D8%A9%20%D9%85%D8%B4%D8%B1%D9%88%D8%B9%D9%8A." target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.6 0 .3 5.3.3 11.8c0 2.1.5 4.1 1.6 5.9L.2 24l6.5-1.7a11.8 11.8 0 0 0 5.6 1.4h.1c6.5 0 11.8-5.3 11.8-11.8 0-3.2-1.3-6.1-3.7-8.4Zm-8.2 18.2c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.7 9.7 0 1 1 8.5 4.7Zm5.3-7.3c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.2-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.7-.8-2.8-1.5-3.9-3.4-.3-.5.3-.5.8-1.6.1-.2 0-.4 0-.6l-.9-2.1c-.2-.5-.5-.4-.7-.4h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.3 1.4 3.6c.2.2 2.4 3.7 5.9 5.2 2.2.9 3.1 1 4.2.8.7-.1 1.7-.7 1.9-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3Z"/></svg>
+          تواصل معي عبر واتساب
+          <span dir="ltr">+20 102 350 1848</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand"><span class="brand-mark" aria-hidden="true">AM</span><p>تصميم وتطوير WordPress<br>وتحسين محركات البحث.</p></div>
+      <p>© <span id="year">2026</span> أحمد منير. جميع الحقوق محفوظة.</p>
+      <a href="#top">العودة للأعلى <span aria-hidden="true">↑</span></a>
+    </div>
+  </footer>
+
+  <a class="floating-whatsapp" href="https://wa.me/201023501848?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%A3%D8%AD%D9%85%D8%AF%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AA%D8%AD%D8%AF%D8%AB%20%D9%85%D8%B9%D9%83%20%D8%B9%D9%86%20%D9%85%D8%B4%D8%B1%D9%88%D8%B9%D9%8A." target="_blank" rel="noopener noreferrer" aria-label="التواصل عبر واتساب">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.6 0 .3 5.3.3 11.8c0 2.1.5 4.1 1.6 5.9L.2 24l6.5-1.7a11.8 11.8 0 0 0 5.6 1.4h.1c6.5 0 11.8-5.3 11.8-11.8 0-3.2-1.3-6.1-3.7-8.4Zm-8.2 18.2c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.7 9.7 0 1 1 8.5 4.7Zm5.3-7.3c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.2-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.7-.8-2.8-1.5-3.9-3.4-.3-.5.3-.5.8-1.6.1-.2 0-.4 0-.6l-.9-2.1c-.2-.5-.5-.4-.7-.4h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.3 1.4 3.6c.2.2 2.4 3.7 5.9 5.2 2.2.9 3.1 1 4.2.8.7-.1 1.7-.7 1.9-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3Z"/></svg>
+  </a>
+
+  <script src="script.js"></script>
 </body>
 </html>
