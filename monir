@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معرض أعمالي | ملف شخصي احترافي</title>
+    <style>
+        /* CSS Variables - الألوان والخطوط */
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --radius: 12px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Reset General Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding: 0;
+            margin: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Container Layout */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation Header */
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--text-main);
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 650px;
+            margin: 0 auto 30px;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: var(--radius);
+            font-weight: 600;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: var(--card-bg);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Sections Common Style */
+        section {
+            padding: 50px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 8px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .skill-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .skill-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .project-info {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+
+        .project-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            background-color: #eff6ff;
+            color: var(--primary-color);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .project-link {
+            font-weight: 600;
+            color: var(--primary-color);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Contact & Footer */
+        .contact-box {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 25px 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 40px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .nav-links {
+                gap: 12px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- القائمة العلوية -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">موقعي الشخصي</div>
+                <ul class="nav-links">
+                    <li><a href="#about">عني</a></li>
+                    <li><a href="#skills">المهارات</a></li>
+                    <li><a href="#projects">المشاريع</a></li>
+                    <li><a href="#contact">تواصل معي</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- المقدمة الشخصية -->
+    <section class="hero" id="about">
+        <div class="container">
+            <h1>مرحباً، أنا مطور ويب ومتخصص SEO</h1>
+            <p>أساعد أصحاب الأعمال والشركات على بناء مواقع سريعة باستخدام وردبريس وتحسين ظهورها في محركات البحث لتحقيق أفضل نتائج ممكنة.</p>
+            <div class="btn-group">
+                <a href="#projects" class="btn btn-primary">تصفح المشاريع</a>
+                <a href="#contact" class="btn btn-secondary">تواصل معي</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المهارات -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">مجالات الخبرة</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>تطوير ووردبريس (WordPress)</h3>
+                    <p>تطوير قوالب وإضافات مخصصة، ضبط الأداء والأمان، وتحسين السرعة للوصول لدرجات ممتازة على PageSpeed.</p>
+                </div>
+                <div class="skill-card">
+                    <h3>تحسين محركات البحث (SEO)</h3>
+                    <p>تهيأة المواقع تقنياً (Technical SEO)، تحسين الهيكلية، إضافة الـ Schema، وبناء استراتيجيات الكلمات المفتاحية.</p>
+                </div>
+                <div class="skill-card">
+                    <h3>برمجة الويب (Front-End)</h3>
+                    <p>بناء واجهات مستخدم متجاوبة وسريعة الاستجابة باستخدام HTML5, CSS3, JavaScript الحديثة.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم معرض المشاريع -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">أحدث المشاريع</h2>
+            <div class="projects-grid">
+                
+                <!-- مشروع 1 -->
+                <div class="project-card">
+                    <div class="project-info">
+                        <h3 class="project-title">متجر إلكتروني سريع بـ WooCommerce</h3>
+                        <p class="project-desc">تطوير متجر متكامل مع ضبط سرعة التحميل لتكون أقل من ثانية واحدة وتحسين تجربة المستخدم على الهواتف.</p>
+                        <div class="tags">
+                            <span class="tag">WordPress</span>
+                            <span class="tag">WooCommerce</span>
+                            <span class="tag">PageSpeed</span>
+                        </div>
+                        <a href="#" class="project-link">معاينة المشروع &larr;</a>
+                    </div>
+                </div>
+
+                <!-- مشروع 2 -->
+                <div class="project-card">
+                    <div class="project-info">
+                        <h3 class="project-title">حملة تحسين SEO لموقع إخباري</h3>
+                        <p class="project-desc">إصلاح المشاكل التقنية وتصميم Schema مخصصة أدت إلى زيادة الزيارات الإرشادية بنسبة 150% خلال 3 أشهر.</p>
+                        <div class="tags">
+                            <span class="tag">Technical SEO</span>
+                            <span class="tag">Schema</span>
+                            <span class="tag">Analytics</span>
+                        </div>
+                        <a href="#" class="project-link">معاينة التقرير &larr;</a>
+                    </div>
+                </div>
+
+                <!-- مشروع 3 -->
+                <div class="project-card">
+                    <div class="project-info">
+                        <h3 class="project-title">إضافة وردبريس مخصصة</h3>
+                        <p class="project-desc">برمجة إضافة خفيفة لحساب تكاليف الشحن تلقائياً دون التأثير على سرعة موقع العميل.</p>
+                        <div class="tags">
+                            <span class="tag">PHP</span>
+                            <span class="tag">WordPress Plugin</span>
+                        </div>
+                        <a href="#" class="project-link">عرض على GitHub &larr;</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم التواصل -->
+    <section id="contact">
+        <div class="container">
+            <div class="contact-box">
+                <h2 style="margin-bottom: 15px;">هل لديك مشروع تريد تنفيذه؟</h2>
+                <p style="color: var(--text-muted); margin-bottom: 25px;">أنا متاح دائماً لمناقشة المشاريع الجديدة والفرص الاستشارية.</p>
+                <a href="mailto:your-email@example.com" class="btn btn-primary">أرسل لي رسالة بريدية</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer>
+        <div class="container">
+            <p>جميع الحقوق محفوظة &copy; 2026 - تم الاستضافة مجاناً على GitHub Pages</p>
+        </div>
+    </footer>
+
+</body>
+</html>
